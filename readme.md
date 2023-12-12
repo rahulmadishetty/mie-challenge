@@ -47,9 +47,7 @@ For extra points, think of a useful feature to add to the system that your frien
 Getting the code and completing your challenge
 =====
 
-update the README in your repository with some screenshots and a link to a YouTube short/video demonstrating your solution 
-
-Since this is a git template repository, it isn't possible to fork it, so you will need to "Use template" and clone it to your local development environment. Then, create a private github repository of your own and change that to be the upstream of your local copy. Once you are ready for us to see your code, add these users as collaborators to your project:
+1) Since this is a [git template repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template), it isn't possible to fork it, so you will need to "[Use template](https://docs.github.com/assets/cb-77734/mw-1440/images/help/repository/use-this-template-button.webp)" and clone it to your local development environment. Then, create a private github repository of your own and change that to be the upstream of your local copy. Once you are ready for us to see your code, add these users as collaborators to your project:
 
 * https://github.com/tslabach
 * https://github.com/lpeckham1
@@ -57,6 +55,7 @@ Since this is a git template repository, it isn't possible to fork it, so you wi
 * https://github.com/ariserac
 * https://github.com/horner
 
+2) update the README in your repository with some screenshots and a link to a YouTube short/video demonstrating your solution 
 
 
 Docker Notes if you'd like to implement a docker container for the database

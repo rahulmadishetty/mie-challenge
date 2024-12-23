@@ -2,23 +2,25 @@
 // Main entry point for application
 
 const express = require('express');
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const path = require('path');
-const bodyParser= require('body-parser');
+const bodyParser = require('body-parser');
 const app = express();
-const { getHomePage} = require('./routes/index');
+const { getHomePage } = require('./routes/index');
 const game = require('./routes/game');
 const game_session = require('./routes/game_session');
+require("dotenv").config()
 
 // TODO: application port should come from config file
-const port = 3000;
 
 // TODO: database connection parameters should come from config file
 const db = mysql.createConnection({
-	host: 'localhost',
-	user: 'app',
-	password: 'wonderful',
-	database: 'miechallenge'})
+	host: process.env.DB_HOST || 'localhost',
+	port: process.env.PORT,
+	user: process.env.DB_USER || 'rahul',
+	password: process.env.DB_PASSWORD || 'Something',
+	database: process.env.DB_NAME || 'miechallenge'
+})
 
 db.connect((err) => {
 	if (err) {
@@ -46,6 +48,6 @@ app.post('/edit-game/:id', game.postEdit);
 app.get('/add-game-session', game_session.getAdd);
 app.post('/add-game-session', game_session.postAdd);
 
-app.listen(port, () => {
-	console.log(`Server running on port: ${port}`);
+app.listen(process.env.PORT, () => {
+	console.log(`Server running at http://localhost:${process.env.PORT}/`);
 });

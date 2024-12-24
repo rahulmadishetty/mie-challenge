@@ -1,9 +1,32 @@
 <%- include('partials/header.ejs') %>
 
-<div>
-	TODO: Display list of board games
-</div>
+<h1>Board Game Directory</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Latest Session</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% games.forEach(game => { %>
+            <tr>
+                <td><%= game.name %></td>
+                <td><%= game.category %></td>
+                <td><%= game.description %></td>
+                <td><%= game.latest_session ? game.latest_session : 'No Sessions Yet' %></td>
+                <td>
+                    <a href="/edit-game/<%= game.id %>">Edit</a>
+                </td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>
 
 <a href="/add-game">Add Game</a>
+<a href="/add-game-session">Add Game Session</a>
 
 <%- include ('partials/footer.ejs') %>

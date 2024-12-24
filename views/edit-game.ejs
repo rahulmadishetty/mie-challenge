@@ -1,5 +1,20 @@
 <%- include ('partials/header.ejs') %>
 
-TODO: Make a form for editing a game
+<h1>Edit Board Game</h1>
+<form action="/edit-game/<%= game.id %>" method="POST">
+    <label>Name:</label>
+    <input type="text" name="name" value="<%= game.name %>" required>
+    <label>Description:</label>
+    <textarea name="description" required><%= game.description %></textarea>
+    <label>Category:</label>
+    <input type="text" name="category" value="<%= game.category %>" required>
+    <label>Max Players:</label>
+    <input type="number" name="max_players" value="<%= game.max_players %>" required>
+    <label>Min Players:</label>
+    <input type="number" name="min_players" value="<%= game.min_players %>" required>
+    <label>Average Duration (mins):</label>
+    <input type="number" name="average_duration" value="<%= game.average_duration %>" required>
+    <button type="submit">Save Changes</button>
+</form>
 
 <%- include ('partials/footer.ejs') %>

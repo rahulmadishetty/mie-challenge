@@ -1,5 +1,24 @@
 <%- include ('partials/header.ejs') %>
 
-TODO: Make a form for adding a game-playing session
+<h1>Add Game Session</h1>
+<form action="/add-game-session" method="POST">
+    <label>Game:</label>
+    <select name="game_id" required>
+        <% games.forEach(game => { %>
+            <option value="<%= game.id %>"><%= game.name %></option>
+        <% }) %>
+    </select>
+    <label>Date:</label>
+    <input type="date" name="session_date" required>
+    <label>Players Count:</label>
+    <input type="number" name="players_count" required>
+    <label>Duration (mins):</label>
+    <input type="number" name="duration" required>
+    <label>Location:</label>
+    <input type="text" name="location" required>
+    <label>Notes:</label>
+    <textarea name="notes"></textarea>
+    <button type="submit">Add Session</button>
+</form>
 
 <%- include ('partials/footer.ejs') %>

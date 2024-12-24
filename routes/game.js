@@ -1,7 +1,3 @@
-const { query } = require("express");
-
-const db = global.db;
-
 module.exports = {
 	getAdd: (req, res) => {
 		res.render('add-game.ejs', {

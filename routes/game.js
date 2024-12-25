@@ -23,13 +23,20 @@ module.exports = {
 		});
 	},
 	postEdit: (req, res) => {
+		console.log('Form Data Received:', req.body);
 		const { id, name, description, category, max_players, min_players, average_duration } = req.body;
+
 		const query = `UPDATE games SET name = ?, description = ?, category = ?, max_players = ?, min_players = ?, average_duration = ? WHERE id=?`;
 
 		// TODO db.query to update game
 
 		db.query(query, [name, description, category, max_players, min_players, average_duration, id], (err) => {
-			if (err) throw err;
+			if (err) {
+				console.error('Database update error:', err);
+				res.status(500).send('Database error');
+				return;
+			};
+			console.log('Game updated successfully');
 			res.redirect('/');
 		});
 	},

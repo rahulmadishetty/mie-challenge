@@ -2,6 +2,7 @@
 
 <h1>Edit Board Game</h1>
 <form action="/edit-game/<%= game.id %>" method="POST">
+    <input type="hidden" name="id" value="<%= game.id %>">
     <label>Name:</label>
     <input type="text" name="name" value="<%= game.name %>" required>
     <label>Description:</label>

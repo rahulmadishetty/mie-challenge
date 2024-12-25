@@ -30,10 +30,10 @@ db.connect((err) => {
 });
 
 global.db = db;
-
+const port = 3011;
+app.set('view engine', 'ejs');
 app.set('port', process.env.port || port);
 app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // If there are static files, make a public directory
@@ -47,7 +47,11 @@ app.get('/edit-game/:id', game.getEdit);
 app.post('/edit-game/:id', game.postEdit);
 app.get('/add-game-session', game_session.getAdd);
 app.post('/add-game-session', game_session.postAdd);
+app.get('/test', (req, res) => {
+	console.log('Test route accessed');
+	res.send('Test route is working');
+});
 
-app.listen(process.env.PORT, () => {
-	console.log(`Server running at http://localhost:${process.env.PORT}/`);
+app.listen(port, () => {
+	console.log(`Server running at http://localhost:${port}/`);
 });

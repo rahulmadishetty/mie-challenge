@@ -58,7 +58,8 @@ CREATE TABLE session_players (
 INSERT INTO games (name, description, category, max_players, min_players, average_duration) VALUES
 ('Catan', 'A strategy game where players build settlements and roads.', 'Strategy', 4, 2, 90),
 ('Ticket to Ride', 'A railway-themed board game.', 'Family', 5, 2, 60),
-('Pandemic', 'A cooperative game where players fight to stop a global outbreak.', 'Cooperative', 4, 2, 75);
+('Pandemic', 'A cooperative game where players fight to stop a global outbreak.', 'Cooperative', 4, 2, 75),
+('Chess', 'This is a strategic game played between 2 players. Both have equal number of pieces either white or black.', 'Strategy', 2, 2, 60);
 
 -- Insert sample data into game_sessions table
 INSERT INTO game_sessions (game_id, session_date, players_count, duration, location, game_outcome, score, notes) VALUES

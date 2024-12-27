@@ -1,21 +1,29 @@
-<%- include ('partials/header.ejs') %>
+<%- include('partials/header.ejs') %>
 
-<h1>Edit Board Game</h1>
+<h1 style="text-align: center; margin-top: 2rem;">Edit Board Game</h1>
+
 <form action="/edit-game/<%= game.id %>" method="POST">
-    <input type="hidden" name="id" value="<%= game.id %>">
-    <label>Name:</label>
-    <input type="text" name="name" value="<%= game.name %>" required>
-    <label>Description:</label>
-    <textarea name="description" required><%= game.description %></textarea>
-    <label>Category:</label>
-    <input type="text" name="category" value="<%= game.category %>" required>
-    <label>Max Players:</label>
-    <input type="number" name="max_players" value="<%= game.max_players %>" required>
-    <label>Min Players:</label>
-    <input type="number" name="min_players" value="<%= game.min_players %>" required>
-    <label>Average Duration (mins):</label>
-    <input type="number" name="average_duration" value="<%= game.average_duration %>" required>
-    <button type="submit">Save Changes</button>
+  <input type="hidden" name="id" value="<%= game.id %>">
+
+  <label for="name">Game Name:</label>
+  <input type="text" id="name" name="name" value="<%= game.name %>" required">
+
+  <label for="description">Description:</label>
+  <textarea id="description" name="description" rows="4" required><%= game.description %></textarea>
+
+  <label for="category">Category:</label>
+  <input type="text" id="category" name="category" value="<%= game.category %>" required>
+
+  <label for="max_players">Max Players:</label>
+  <input type="number" id="max_players" name="max_players" value="<%= game.max_players %>" required>
+
+  <label for="min_players">Min Players:</label>
+  <input type="number" id="min_players" name="min_players" value="<%= game.min_players %>" required>
+
+  <label for="average_duration">Average Duration (mins):</label>
+  <input type="number" id="average_duration" name="average_duration" value="<%= game.average_duration %>" required>
+
+  <button type="submit">Save Changes</button>
 </form>
 
-<%- include ('partials/footer.ejs') %>
+<%- include('partials/footer.ejs') %>

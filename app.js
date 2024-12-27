@@ -13,26 +13,61 @@ require("dotenv").config()
 
 // TODO: application port should come from config file
 
+const dbConfig = {
+	host: process.env.DB_HOST,
+	port: process.env.DB_PORT,
+	user: process.env.DB_USER,
+	password: process.env.DB_PASSWORD,
+	database: process.env.DB_NAME,
+};
+let connectionAttempts = 0;
+
 // TODO: database connection parameters should come from config file
-const db = mysql.createConnection({
-	host: process.env.DB_HOST || 'localhost',
-	port: process.env.PORT,
-	user: process.env.DB_USER || 'rahul',
-	password: process.env.DB_PASSWORD || 'Something',
-	database: process.env.DB_NAME || 'miechallenge'
-})
 
-db.connect((err) => {
-	if (err) {
-		throw err;
-	}
-	console.log('Connected to database');
-});
+function connectWithRetry() {
+	connectionAttempts++;
+	const db = mysql.createConnection(dbConfig);
 
-global.db = db;
-const port = 3011;
+	db.connect((err) => {
+		if (err) {
+			console.error(`Database connection failed (attempt ${connectionAttempts}):`, err);
+			if (connectionAttempts < 10) {
+				console.log('Retrying in 5 seconds...');
+				setTimeout(connectWithRetry, 5000);
+			} else {
+				console.error('Max connection attempts reached. Exiting...');
+				process.exit(1);
+			}
+		} else {
+			console.log('Connected to database');
+			global.db = db;
+		}
+	});
+}
+
+connectWithRetry();
+
+// const db = mysql.createConnection({
+// 	host: process.env.DB_HOST || 'localhost',
+// 	port: process.env.DB_PORT || 3307,
+// 	user: process.env.DB_USER || 'rahul',
+// 	password: process.env.DB_PASSWORD || 'Something',
+// 	database: process.env.DB_NAME || 'miechallenge'
+// })
+
+// db.connect((err) => {
+// 	if (err) {
+// 		throw err;
+// 	}
+// 	console.log('Connected to database');
+// });
+
+// global.db = db;
+
+
+const frontend_port = 3011;
 app.set('view engine', 'ejs');
-app.set('port', process.env.port || port);
+app.set('port', frontend_port);
 app.set('views', __dirname + '/views');
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -52,6 +87,6 @@ app.get('/test', (req, res) => {
 	res.send('Test route is working');
 });
 
-app.listen(port, () => {
-	console.log(`Server running at http://localhost:${port}/`);
+app.listen(frontend_port, () => {
+	console.log(`Server running at http://localhost:${frontend_port}/`);
 });
